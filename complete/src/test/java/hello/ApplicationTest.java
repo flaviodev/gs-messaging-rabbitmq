@@ -26,6 +26,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import hello.messagebus.base.RabbitConfig;
+
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class ApplicationTest {
@@ -41,7 +43,7 @@ public class ApplicationTest {
 
     @Test
     public void test() throws Exception {
-        rabbitTemplate.convertAndSend(Application.queueName, "Hello from RabbitMQ!");
+        rabbitTemplate.convertAndSend(RabbitConfig.queueName, "Hello from RabbitMQ!");
         receiver.getLatch().await(10000, TimeUnit.MILLISECONDS);
     }
 
